@@ -185,35 +185,46 @@ test('path resolution callback replaces values on the object', async () => {
     .addPathSegment(null)
     .addPathSegment('c')
     .addPathSegment(null)
-    .addPathSegment('e');
+    .addPathSegment('e')
+    .addPathSegment('f');
   let object = {
     a: {
       b: [
         {
-          c: {
-            d: 1
-          }
+          c: [{ e: {} }]
         },
         {
-          c: [{ e: 3 }, { e: 4 }]
+          c: [
+            {
+              e: { f: 4 }
+            },
+            {
+              e: { f: 5 }
+            }
+          ]
         }
       ]
     }
   };
-  let result = await path.resolve(object, result => {
-    return result + 1;
+  let result = await path.resolve(object, () => {
+    return 1;
   });
-  expect(result).toEqual([4, 5]);
+  expect(result).toEqual([1, 1]);
   expect(object).toEqual({
     a: {
       b: [
         {
-          c: {
-            d: 1
-          }
+          c: [{ e: {} }]
         },
         {
-          c: [{ e: 4 }, { e: 5 }]
+          c: [
+            {
+              e: { f: 1 }
+            },
+            {
+              e: { f: 1 }
+            }
+          ]
         }
       ]
     }
