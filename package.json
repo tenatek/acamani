@@ -1,0 +1,19 @@
+{
+  "name": "acamani",
+  "version": "0.0.1",
+  "description": "A minimal utility to describe & resolve paths within JSON objects.",
+  "main": "Acamani.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Tenatek <contact@tenatek.com> (https://tenatek.com)",
+  "contributors": [
+    "Ludovic Cyril Michel <ludovic@tenatek.com> (https://github.com/ludoviccyril)"
+  ],
+  "repository": "github:tenatek/acamani",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "jest": "^23.1.0"
+  }
+}
