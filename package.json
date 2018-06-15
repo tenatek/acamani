@@ -1,6 +1,6 @@
 {
   "name": "acamani",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A minimal utility to describe & resolve paths within JSON objects.",
   "main": "Acamani.js",
   "scripts": {
