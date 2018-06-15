@@ -1,6 +1,17 @@
 const JSONPath = require('../lib/JSONPath');
 
-test('accesses the right node in a simple object', async () => {
+test('path can be converted to pointer', () => {
+  expect.assertions(1);
+  let path = new JSONPath()
+    .addPathSegment('a')
+    .addPathSegment('b')
+    .addPathSegment(0)
+    .addPathSegment('c');
+  let pointer = path.pathAsPointer();
+  expect(pointer).toBe('/a/b/0/c');
+});
+
+test('path resolution returns the right value in a simple object', async () => {
   expect.assertions(1);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -22,7 +33,7 @@ test('accesses the right node in a simple object', async () => {
   expect(result).toEqual({ d: 1 });
 });
 
-test('accesses various nodes in an array', async () => {
+test('path resolution returns various values in an array', async () => {
   expect.assertions(1);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -49,7 +60,7 @@ test('accesses various nodes in an array', async () => {
   expect(result).toEqual([{ d: 1 }, { e: 2 }]);
 });
 
-test('handles dead ends appropriately', async () => {
+test('path resolution handles dead ends correctly', async () => {
   expect.assertions(1);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -74,7 +85,7 @@ test('handles dead ends appropriately', async () => {
   expect(result).toEqual({ d: 1 });
 });
 
-test('handles nested arrays appropriately', async () => {
+test('path resolution handles nested arrays correctly', async () => {
   expect.assertions(1);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -109,7 +120,7 @@ test('handles nested arrays appropriately', async () => {
   expect(result).toEqual([{ d: 1 }, { e: 2 }, { f: 3 }]);
 });
 
-test('handles illegal paths appropriately', async () => {
+test('path resolution handles illegal paths correctly', async () => {
   expect.assertions(1);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -142,7 +153,31 @@ test('handles illegal paths appropriately', async () => {
   expect(result).toEqual([{ e: 2 }, { f: 3 }]);
 });
 
-test('replaces values on the object', async () => {
+test('path resolution returns null if no values match', async () => {
+  expect.assertions(1);
+  let path = new JSONPath()
+    .addPathSegment('a')
+    .addPathSegment('f')
+    .addPathSegment('g');
+  let object = {
+    a: {
+      b: [
+        {
+          c: {
+            d: 1
+          }
+        },
+        {
+          c: [{ e: 3 }, { e: 4 }]
+        }
+      ]
+    }
+  };
+  let result = await path.resolve(object);
+  expect(result).toBe(null);
+});
+
+test('path resolution callback replaces values on the object', async () => {
   expect.assertions(2);
   let path = new JSONPath()
     .addPathSegment('a')
@@ -185,7 +220,7 @@ test('replaces values on the object', async () => {
   });
 });
 
-test('replaces values in arrays', async () => {
+test('path resolution callback replaces values in arrays', async () => {
   expect.assertions(2);
   let path = new JSONPath().addPathSegment(null);
   let object = [1, 2, 3];
@@ -194,4 +229,15 @@ test('replaces values in arrays', async () => {
   });
   expect(result).toEqual([2, 3, 4]);
   expect(object).toEqual([2, 3, 4]);
+});
+
+test('path copy utility returns an exact copy', () => {
+  expect.assertions(1);
+  let path = new JSONPath()
+    .addPathSegment('a')
+    .addPathSegment('b')
+    .addPathSegment(0)
+    .addPathSegment('c');
+  let copy = JSONPath.copy(path);
+  expect(copy).toEqual(path);
 });
