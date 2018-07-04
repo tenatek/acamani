@@ -235,8 +235,8 @@ test('path resolution callback replaces values in arrays', async () => {
   expect.assertions(2);
   let path = new JSONPath().addPathSegment(null);
   let object = [1, 2, 3];
-  let result = await path.resolve(object, result => {
-    return result + 1;
+  let result = await path.resolve(object, number => {
+    return number + 1;
   });
   expect(result).toEqual([2, 3, 4]);
   expect(object).toEqual([2, 3, 4]);
