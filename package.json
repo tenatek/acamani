@@ -4,7 +4,8 @@
   "description": "A minimal utility to describe & resolve paths within JSON objects.",
   "main": "Acamani.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ignore-path .gitignore"
   },
   "author": "Tenatek <contact@tenatek.com> (https://tenatek.com)",
   "contributors": [
@@ -14,7 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-tenatek": "^1.1.0",
-    "jest": "^23.3.0"
+    "eslint-config-tenatek": "^2.0.0",
+    "jest": "^23.4.0"
   }
 }
