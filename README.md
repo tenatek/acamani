@@ -2,6 +2,11 @@
 
 A minimal utility to describe & resolve paths within JSON objects.
 
+[![npm version](https://img.shields.io/npm/v/acamani.svg)](https://www.npmjs.com/package/acamani)
+[![npm downloads](https://img.shields.io/npm/dm/acamani.svg)](https://www.npmjs.com/package/acamani)
+[![build status](https://travis-ci.org/tenatek/acamani.svg?branch=master)](https://travis-ci.org/tenatek/acamani)
+[![coverage status](https://coveralls.io/repos/github/tenatek/acamani/badge.svg?branch=master)](https://coveralls.io/github/tenatek/acamani?branch=master)
+
 This package provides a single class, `JSONPath`, which extends the JavaScript `Array` class.
 
 A `JSONPath` is an array of the properties that you have to successively access, in order to resolve the path. 
