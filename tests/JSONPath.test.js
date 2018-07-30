@@ -216,9 +216,10 @@ test('path resolution callback replaces values in arrays', async () => {
 });
 
 test('path can be copied using slice', () => {
-  expect.assertions(1);
+  expect.assertions(2);
   let path = new JSONPath();
   path.push('a', 'b', 0, 'c');
   let copy = path.slice();
   expect(copy).toEqual(path);
+  expect(copy instanceof JSONPath).toBe(true);
 });
