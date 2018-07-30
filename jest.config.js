@@ -1,3 +1,3 @@
 module.exports = {
-  testUrl: 'http://localhost'
+  testURL: 'http://localhost'
 };
